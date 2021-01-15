@@ -1,0 +1,37 @@
+version: '3'
+
+services:
+  server:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    working_dir: /usr/src/app
+    volumes:
+      - ./server:/usr/src/app
+      - /usr/src/app/node_modules
+    environment:
+      - MESSAGE_QUEUE=amqp://rabbitmq
+    links:
+      - rabbitmq
+    command: ["./wait-for-it.sh", "rabbitmq:5672", "-t", "90", "--", "node", "server.js"]
+    ports: 
+      - 3000:8080
+
+  worker:
+    build:
+      context: ./worker
+      dockerfile: Dockerfile
+    working_dir: /usr/src/app
+    volumes:
+      - ./worker:/usr/src/app
+      - /usr/src/app/node_modules
+    environment:
+      - MESSAGE_QUEUE=amqp://rabbitmq
+    links:
+      - rabbitmq
+    command: ["./wait-for-it.sh", "rabbitmq:5672", "-t", "90", "--", "node", "worker.js"]
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    ports: 
+      - 8080:15672

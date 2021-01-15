@@ -1,0 +1,15 @@
+{
+    "name": "rabbit-mq-worker",
+    "version": "1.0.0",
+    "description": "Node.js rabbit mq worker on Docker",
+    "author": "Hamza Lhioui <hamza.lhioui@gmail.com>",
+    "main": "worker.js",
+    "scripts": {
+      "start": "node worker.js"
+    },
+    "dependencies": {
+      "express": "^4.16.1",
+      "amqplib": "0.6.0",
+      "winston": "2.4.2"
+    }
+  }

@@ -1,0 +1,16 @@
+{
+    "name": "rabbit-mq-server",
+    "version": "1.0.0",
+    "description": "Node.js rabbit mq producer on Docker",
+    "author": "Hamza Lhioui <hamza.hioui@gmail.com>",
+    "main": "server.js",
+    "scripts": {
+      "start": "node server.js"
+    },
+    "dependencies": {
+      "express": "^4.16.1",
+      "amqplib": "0.6.0",
+      "winston": "2.4.2",
+      "body-parser": "1.19.0"
+    }
+  }
